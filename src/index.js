@@ -39,7 +39,7 @@ const App = () => {
       <Welcome name="Sara" />
       <Welcome name="Alex" />
 
-      <Clock date={new Date()} />
+      <Clock />
     </div>
   );
 };
