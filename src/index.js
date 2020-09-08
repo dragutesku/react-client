@@ -4,6 +4,7 @@ import './css/minimal-ui.css';
 import './scss/ui.scss';
 
 // Components
+import Header from './client/components/Header/Header';
 import Clock from './client/components/Clock/Clock';
 import Toggle from './client/components/Button/Toggle';
 import LoginControl from './client/components/LoginControl/LoginControl';
@@ -13,6 +14,7 @@ import LoginControl from './client/components/LoginControl/LoginControl';
 const App = () => {
   return (
     <div className="container mx-auto">
+      <Header />
       <Clock />
       <LoginControl />
       <Toggle />
