@@ -34,8 +34,8 @@ export default class Clock extends Component {
     return (
       <div className="Clock">
         <div>
-          <h1>The Time Is !</h1>
-          <h2>
+          <h1 className="text-2xl">The Time Is !</h1>
+          <h2 className="text-2xl">
             {date.toLocaleTimeString()}
           </h2>
         </div>
