@@ -1,7 +1,10 @@
 const path = require("path");
 const common = require("../webpack.common");
 const { merge } = require("webpack-merge");
-const { JSBASEPATH, DIST_PATH } = require('../build.config');
+const { 
+  JSBASEPATH, 
+  DIST_PATH
+} = require('../build.config');
 
 module.exports = merge(common, {
   // ENV

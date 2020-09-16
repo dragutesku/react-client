@@ -4,13 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build-dev": "webpack --config ./config/env/webpack.dev.js",
-    "build-prod": "webpack --config ./config/env/webpack.prod.js",
-    "dev-server": "nodemon ./server/index.js",
-    "prod-server": "node ./server/index.js",
-    "eslint-fix": "eslint --fix \"src/**/*.js\"",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "development": "webpack --config ./config/env/webpack.dev.js",
+    "production-build": "webpack --config ./config/env/webpack.prod.js",
+    "server-development": "nodemon ./server/index.js",
+    "server-production": "node ./server/index.js",
+    "eslint-fix": "eslint --fix \"src/**/*.js\""
   },
   "author": "",
   "license": "ISC",
@@ -29,6 +27,7 @@
     "@storybook/web-components": "^6.0.21",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
+    "classnames": "^2.2.6",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^4.2.2",
     "eslint": "^7.8.1",

@@ -1,16 +1,16 @@
-import React, { Component, } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 
 export default class Clock extends Component {
   static propTypes = {
-    date: PropTypes.object,
+    date: PropTypes.object
   };
 
   constructor (props) {
     super(props);
 
-    this.state = { date: new Date(), };
+    this.state = { date: new Date() };
   }
 
   componentDidMount () {
@@ -25,11 +25,11 @@ export default class Clock extends Component {
   }
 
   tick () {
-    this.setState({ date: new Date(), });
+    this.setState({ date: new Date() });
   }
 
   render () {
-    const { date, } = this.state;
+    const { date } = this.state;
 
     return (
       <div className="Clock">

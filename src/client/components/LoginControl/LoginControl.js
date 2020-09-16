@@ -1,5 +1,5 @@
 
-import React, { Component, } from 'react';
+import React, { Component } from 'react';
 import Greeting from './Greeting';
 import Button from '../Button/Button';
 
@@ -10,15 +10,15 @@ export default class LoginControl extends Component {
 
     // this.handleLoginClick = this.handleLoginClick.bind(this);
     // this.handleLogoutClick = this.handleLogoutClick.bind(this);
-    this.state = { isLoggedIn: false, };
+    this.state = { isLoggedIn: false };
   }
 
   handleLoginCLick = () => {
-    this.setState({ isLoggedIn: true, });
+    this.setState({ isLoggedIn: true });
   }
 
   handleLogoutClick = () => {
-    this.setState({ isLoggedIn: false, });
+    this.setState({ isLoggedIn: false });
   }
 
   render () {

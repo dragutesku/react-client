@@ -1,17 +1,19 @@
+const path = require('path');
 const express = require('express');
 
-const server = express();
+const app = express();
 
 // Bundled Client source
-server.use(express.static('../dist'));
+app.use(express.static(path.join(__dirname, "..", "dist")));
+app.use(express.static("static"));
 
-// Main Route
-server.get("/", (req, res) => {
-  res.send('An alligator approaches!');
+app.use((req, res, next) => {
+  res.sendFile(path.join(__dirname, "..", "dist", "index.html"));
 });
 
+const port = '3006';
 
 //set port, listen for requests
-server.listen("3002", () => {
-  console.log("Client is up and running");
+app.listen(port, () => {
+  console.log(`Client running on port ${port}`);
 });
