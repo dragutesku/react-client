@@ -14,6 +14,7 @@ export default class Keyboard extends Component {
 
   handleKeyPress (e) {
     this.props.keyboardOutput(e.target.value);
+    this.props.keyboardReset(e.target.value);
   }
 
   render () {
