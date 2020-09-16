@@ -8,15 +8,20 @@ export default class Calculator extends Component {
     super(props);
     this.getKeyboardOutput = this.getKeyboardOutput.bind(this);
     this.handleReset = this.handleReset.bind(this);
+    this.handleEvaluate = this.handleEvaluate.bind(this);
     this.state = {
       result: '0'
     };
   }
 
+  componentDidMount () {
+    console.log(this.state.result);
+  }
+
   getKeyboardOutput (e) {
     const { result } = this.state;
     result !== '0' ? 
-      this.setState({ result: result.concat(e) }) : 
+      this.setState({ result: result.concat(e).toString() }) : 
       this.setState({ result: e })
     ;
     console.log(e);
@@ -25,6 +30,14 @@ export default class Calculator extends Component {
   handleReset (e) {
     if(e === 'AC') {
       this.setState({ result: '0' });
+    }
+  }
+
+  handleEvaluate (e) {
+    if (e === '=') {
+      const newResult = eval(this.state.result);
+      console.log(newResult.toString());
+      this.setState({ result: newResult });
     }
   }
 
@@ -52,6 +65,7 @@ export default class Calculator extends Component {
         <Keyboard  
           keyboardOutput={this.getKeyboardOutput}
           keyboardReset={this.handleReset}
+          keyboardEvaluate={this.handleEvaluate}
         />
       </div>
     );
