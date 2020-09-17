@@ -8,7 +8,7 @@ export default class Calculator extends Component {
     super(props);
     this.handleKeyboardOutput = this.handleKeyboardOutput.bind(this);
     this.state = {
-      display: '',
+      display: '0',
       lastResult: '',
       inputValue: '',
     };
@@ -61,6 +61,7 @@ export default class Calculator extends Component {
       'flex-row-reverse',
       'min-w-full',
       'p-2',
+      'text-right',
       'results',
     );
 
