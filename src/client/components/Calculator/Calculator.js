@@ -6,7 +6,7 @@ import Keyboard from './Keyboard';
 export default class Calculator extends Component {
   constructor (props) {
     super(props);
-    this.handleKeyboardOutput = this.handleKeyboardOutput.bind(this);
+    this.handleKeyboardOutput = this.handleKeyboardInput.bind(this);
     this.state = {
       display: '0',
       lastResult: '',
@@ -14,7 +14,7 @@ export default class Calculator extends Component {
     };
   }
 
-  handleKeyboardOutput (e) {
+  handleKeyboardInput (e) {
     const event = {
       digit: parseInt(e),
       add: '+',
@@ -30,7 +30,7 @@ export default class Calculator extends Component {
 
     // Handle Events
     if (isNaN(event.digit)) {
-      // HERE ME MAKE OPERATIONS
+      // HERE I MAKE OPERATIONS
       console.log('You pressed something else' + ' ' + e);
 
       // Parse float numbers
@@ -68,7 +68,7 @@ export default class Calculator extends Component {
     return (
       <div className={calculatorClasses} >
         <input className={resultClasses} type="text" value={this.state.display} readOnly/>
-        <Keyboard keyboardOutput={this.handleKeyboardOutput} />
+        <Keyboard keyboardOutput={this.handleKeyboardInput} />
       </div>
     );
   }
