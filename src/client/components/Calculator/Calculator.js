@@ -6,38 +6,44 @@ import Keyboard from './Keyboard';
 export default class Calculator extends Component {
   constructor (props) {
     super(props);
-    this.getKeyboardOutput = this.getKeyboardOutput.bind(this);
-    this.handleReset = this.handleReset.bind(this);
-    this.handleEvaluate = this.handleEvaluate.bind(this);
+    this.handleKeyboardOutput = this.handleKeyboardOutput.bind(this);
     this.state = {
-      result: '0'
+      display: '',
+      lastResult: '',
+      inputValue: '',
     };
   }
 
-  componentDidMount () {
-    console.log(this.state.result);
-  }
-
-  getKeyboardOutput (e) {
-    const { result } = this.state;
-    result !== '0' ? 
-      this.setState({ result: result.concat(e).toString() }) : 
-      this.setState({ result: e })
-    ;
-    console.log(e);
-  }
-
-  handleReset (e) {
-    if(e === 'AC') {
-      this.setState({ result: '0' });
+  handleKeyboardOutput (e) {
+    const event = {
+      digit: parseInt(e),
+      add: '+',
+      substract: '-',
+      divide: '/',
+      multiply: 'x',
+      evaluate: '=',
+      reset: 'AC',
+      percent: '%',
+      negate: '+/-',
+      float: '.'
     }
-  }
 
-  handleEvaluate (e) {
-    if (e === '=') {
-      const newResult = eval(this.state.result);
-      console.log(newResult.toString());
-      this.setState({ result: newResult });
+    // Handle Events
+    if (isNaN(event.digit)) {
+      // HERE ME MAKE OPERATIONS
+      console.log('You pressed something else' + ' ' + e);
+
+      // Parse float numbers
+      if (e === event.float) {
+        console.log('You started a float digit' + ' ' + event.digit);
+      }
+      // Reset the display
+      if (e === event.reset) {
+        console.log('Your display has been reseted !');
+      }
+    } else {
+      // HERE WE UPDATE DISPLAY WITH DIGITS
+      console.log('You pressed a digit' + ' ' + event.digit);
     }
   }
 
@@ -53,20 +59,15 @@ export default class Calculator extends Component {
     const resultClasses = classNames(
       'flex',
       'flex-row-reverse',
+      'min-w-full',
       'p-2',
       'results',
     );
 
     return (
       <div className={calculatorClasses} >
-        <div className={resultClasses}>
-          {this.state.result}
-        </div>
-        <Keyboard  
-          keyboardOutput={this.getKeyboardOutput}
-          keyboardReset={this.handleReset}
-          keyboardEvaluate={this.handleEvaluate}
-        />
+        <input className={resultClasses} type="text" value={this.state.display} readOnly/>
+        <Keyboard keyboardOutput={this.handleKeyboardOutput} />
       </div>
     );
   }

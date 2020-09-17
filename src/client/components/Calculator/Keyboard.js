@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import Key from './Key';
 
 const specials = ['AC', '+/-', '%'];
-const keys = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '.'];
+const digits = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '.'];
 const operations = ['/', 'x', '-', '+', '='];
 
 export default class Keyboard extends Component {
@@ -14,8 +14,6 @@ export default class Keyboard extends Component {
 
   handleKeyPress (e) {
     this.props.keyboardOutput(e.target.value);
-    this.props.keyboardReset(e.target.value);
-    this.props.keyboardEvaluate(e.target.value);
   }
 
   render () {
@@ -43,16 +41,16 @@ export default class Keyboard extends Component {
       );
     });
 
-    const getKeys = keys.map(key => {
+    const getDigits = digits.map(digit => {
       return (
         <li
           className="key"
-          key={key.toString()}
+          key={digit.toString()}
         >
           <Key
-            name={key}
+            name={digit}
             clickEvent={this.handleKeyPress}
-            value={key}
+            value={digit}
           />
         </li>
       );
@@ -79,7 +77,7 @@ export default class Keyboard extends Component {
           {getSpecials}
         </ul>
         <ul className="w-full keys">
-          {getKeys}
+          {getDigits}
         </ul>
         <ul className="w-full operations">
           {getOperations}

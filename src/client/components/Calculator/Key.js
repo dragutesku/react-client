@@ -5,12 +5,6 @@ import classNames from 'classnames';
 export default class Key extends Component {
   constructor (props) {
     super(props);
-
-    this.clickEvent = this.clickEvent.bind(this);
-  }
-
-  clickEvent (e) {
-    this.props.clickEvent(e);
   }
 
   render () {
@@ -21,13 +15,19 @@ export default class Key extends Component {
       'bg-gray-400',
     );
 
+    const { 
+      clickEvent, 
+      value, 
+      name, 
+    } = this.props;
+
     return (
       <button
         className={keyClasses}
-        onClick={this.clickEvent}
-        value={this.props.value}
+        onClick={clickEvent}
+        value={value}
       >
-        {this.props.name}
+        {name}
       </button>
     );
   }
