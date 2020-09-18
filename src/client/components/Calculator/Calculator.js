@@ -34,7 +34,7 @@ export default class Calculator extends Component {
   handleKeyboardInput (e) {
     const event = {
       digit: parseInt(e),
-      operations: ['+', '-', 'x', '/'],
+      operations: ['+', '-', '*', '/'],
       evaluate: '=',
       reset: 'AC',
       percent: '%',
@@ -50,6 +50,13 @@ export default class Calculator extends Component {
 
       if (e === operation) {
         console.log(`Operation: ${operation}`);
+
+        switch (operation) {
+          case '+':
+            console.log('You want an addition');
+          case '-':
+            console.log('You want a substraction');
+        }
       } else {
         console.log(`You pressed ${e}`);
       }

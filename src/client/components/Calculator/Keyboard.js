@@ -4,7 +4,7 @@ import Key from './Key';
 
 const specials = ['AC', '+/-', '%'];
 const digits = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '.'];
-const operations = ['/', 'x', '-', '+', '='];
+const operations = ['/', '*', '-', '+', '='];
 
 export default class Keyboard extends Component {
   constructor (props) {
