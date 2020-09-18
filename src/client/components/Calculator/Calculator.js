@@ -22,9 +22,9 @@ const resultClasses = classNames(
 export default class Calculator extends Component {
   constructor (props) {
     super(props);
-    this.handleKeyboardOutput = this.handleKeyboardInput.bind(this);
+    this.handleKeyboardInput = this.handleKeyboardInput.bind(this);
     this.state = {
-      display: '0',
+      display: '',
       lastResult: '',
       inputValue: '',
     };
@@ -43,6 +43,7 @@ export default class Calculator extends Component {
       negate: '+/-',
       float: '.'
     }
+    
 
     // Handle Events
     if (isNaN(event.digit)) {
@@ -51,7 +52,7 @@ export default class Calculator extends Component {
 
       // Parse float numbers
       if (e === event.float) {
-        console.log('You started a float digit' + ' ' + event.digit);
+        console.log(`You started a float digit ${digit}`);
       }
       // Reset the display
       if (e === event.reset) {
@@ -59,17 +60,23 @@ export default class Calculator extends Component {
       }
     } else {
       // HERE WE UPDATE DISPLAY WITH DIGITS
-      console.log('You pressed a digit' + ' ' + event.digit);
+      const digit = event.digit.toString();
+      this.setState({ display: this.state.display.concat(digit) });
+      console.log(digit);
+      console.log(`You pressed a digit ${e}`);
     }
   }
 
   render () {
+    const { display } = this.state;
 
     return (
       <div className={calculatorClasses} >
-        <input className={resultClasses} type="text" value={this.state.display} readOnly/>
+        <div className={resultClasses}>
+          {display ? display : '0'}
+        </div>
         <Keyboard keyboardOutput={this.handleKeyboardInput} />
       </div>
     );
   }
-}
+};
