@@ -25,18 +25,16 @@ export default class Calculator extends Component {
     this.handleKeyboardInput = this.handleKeyboardInput.bind(this);
     this.state = {
       display: '',
+      result: '',
       lastResult: '',
-      inputValue: '',
+      lastValue: '',
     };
   }
 
   handleKeyboardInput (e) {
     const event = {
       digit: parseInt(e),
-      add: '+',
-      substract: '-',
-      divide: '/',
-      multiply: 'x',
+      operations: ['+', '-', 'x', '/'],
       evaluate: '=',
       reset: 'AC',
       percent: '%',
@@ -44,25 +42,32 @@ export default class Calculator extends Component {
       float: '.'
     }
     
+    const { display } = this.state;
 
     // Handle Events
     if (isNaN(event.digit)) {
-      // HERE I MAKE OPERATIONS
-      console.log('You pressed something else' + ' ' + e);
+      const operation = event.operations.find(operation => operation.startsWith(e));
+
+      if (e === operation) {
+        console.log(`Operation: ${operation}`);
+      } else {
+        console.log(`You pressed ${e}`);
+      }
 
       // Parse float numbers
-      if (e === event.float) {
-        console.log(`You started a float digit ${digit}`);
+      if (e === event.float && display) {
+        const float = event.float.toString();
+        this.setState({ display: display.concat(event.float) });
       }
       // Reset the display
       if (e === event.reset) {
+        this.setState({ display: '' });
         console.log('Your display has been reseted !');
       }
     } else {
       // HERE WE UPDATE DISPLAY WITH DIGITS
       const digit = event.digit.toString();
-      this.setState({ display: this.state.display.concat(digit) });
-      console.log(digit);
+      this.setState({ display: display.concat(digit) });
       console.log(`You pressed a digit ${e}`);
     }
   }
