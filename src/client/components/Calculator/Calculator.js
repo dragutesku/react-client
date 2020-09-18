@@ -2,6 +2,22 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import Keyboard from './Keyboard';
 
+const calculatorClasses = classNames(
+  'p-2',
+  'text-xl',
+  'text-gray-600',
+  'bg-blue-300',
+  'calculator',
+);
+
+const resultClasses = classNames(
+  'flex',
+  'flex-row-reverse',
+  'min-w-full',
+  'p-2',
+  'text-right',
+  'results',
+);
 
 export default class Calculator extends Component {
   constructor (props) {
@@ -48,22 +64,6 @@ export default class Calculator extends Component {
   }
 
   render () {
-    const calculatorClasses = classNames(
-      'p-2',
-      'text-xl',
-      'text-gray-600',
-      'bg-blue-300',
-      'calculator',
-    );
-
-    const resultClasses = classNames(
-      'flex',
-      'flex-row-reverse',
-      'min-w-full',
-      'p-2',
-      'text-right',
-      'results',
-    );
 
     return (
       <div className={calculatorClasses} >
