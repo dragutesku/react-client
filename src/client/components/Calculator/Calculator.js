@@ -12,80 +12,153 @@ const calculatorClasses = classNames(
 
 const resultClasses = classNames(
   'flex',
-  'flex-row-reverse',
+  'flex-col',
   'min-w-full',
   'p-2',
   'text-right',
   'results',
 );
 
+const event = {
+  operations: ['+', '-', '*', '/'],
+  evaluate: '=',
+  fullReset: 'AC',
+  displayReset: 'C',
+  percent: '%',
+  negate: '+/-',
+  float: '.'
+}
+
 export default class Calculator extends Component {
   constructor (props) {
     super(props);
     this.handleKeyboardInput = this.handleKeyboardInput.bind(this);
     this.state = {
+      total: 0,
+      result: 0,
       display: '',
-      result: '',
+      firstInput: '',
       lastResult: '',
-      lastValue: '',
     };
   }
 
   handleKeyboardInput (e) {
-    const event = {
-      digit: parseInt(e),
-      operations: ['+', '-', '*', '/'],
-      evaluate: '=',
-      reset: 'AC',
-      percent: '%',
-      negate: '+/-',
-      float: '.'
+    const digit = parseFloat(e);
+  //   const { 
+  //     total,
+  //     display, 
+  //     firstInput, 
+  //     result, 
+  //     lastResult 
+  // } = this.state;
+
+    // Updates the display
+    const updateDisplay = () => {
+      const newDigit = digit.toString();
+      this.setState((state) => { 
+        display: state.display.concat(newDigit) 
+      });
+      console.log(`You pressed a digit ${e}`);
     }
-    
-    const { display } = this.state;
 
     // Handle Events
-    if (isNaN(event.digit)) {
+    if (isNaN(digit)) {
       const operation = event.operations.find(operation => operation.startsWith(e));
-
       if (e === operation) {
-        console.log(`Operation: ${operation}`);
+
+        const operationUpdate = (setResult) => {
+          this.setState({
+            total: setResult.toString(),
+            result: setResult.toString(),
+          });
+          this.setState((state) => { display: '' });
+          console.log(`The result is: ${result}`);
+        }
+
+        const handleAddition = () => {
+          const setResult = Number(display) + Number(result);
+          operationUpdate(setResult);
+        }
+
+        const handleSubstraction = () => {
+          const setResult = Number(display) - Number(result);
+          operationUpdate(setResult);
+        }
+
+        const handleDivision = () => {
+          const setResult = Number(display) / Number(result);
+          operationUpdate(setResult);
+        }
+
+        const handleMultiplication = () => {
+          const setResult = Number(display) * Number(result);
+          operationUpdate(setResult);
+        }
 
         switch (operation) {
           case '+':
-            console.log('You want an addition');
+            handleAddition();
+            console.log('You want addition');
+            break;
           case '-':
-            console.log('You want a substraction');
+            handleSubstraction();
+            console.log('You want substraction');
+            break;
+          case '*':
+            handleMultiplication();
+            console.log('You want multiplication');
+            break;
+          case '/':
+            handleDivision();
+            console.log('You want division');
+            break;
         }
+        console.log(`Operation: ${operation}`);
       } else {
         console.log(`You pressed ${e}`);
       }
 
       // Parse float numbers
-      if (e === event.float && display) {
+      if (e === event.float && this.state.display) {
         const float = event.float.toString();
-        this.setState({ display: display.concat(event.float) });
+        this.setState((state) => { 
+          display: state.display.concat(event.float) 
+        });
       }
       // Reset the display
-      if (e === event.reset) {
+      if (e === event.displayReset) {
         this.setState({ display: '' });
-        console.log('Your display has been reseted !');
+        console.log('Display Reset happened !');
+      } else if (e === event.fullReset) {
+        this.setState({ 
+          display: '', 
+          firstInput: '',
+          result: '',
+          lastResult: '',
+          total: 0,
+        });
+        console.log('Full Reset happened !');
       }
     } else {
       // HERE WE UPDATE DISPLAY WITH DIGITS
-      const digit = event.digit.toString();
-      this.setState({ display: display.concat(digit) });
-      console.log(`You pressed a digit ${e}`);
+      // NOTE: Can be converted to Number in state ASK JALBA
+      updateDisplay();
     }
   }
 
   render () {
-    const { display } = this.state;
+    const { 
+      display, 
+      total 
+    } = this.state;
 
     return (
       <div className={calculatorClasses} >
         <div className={resultClasses}>
-          {display ? display : '0'}
+          {/* Total */}
+          <p className="min-w-full">{total ? total : 0}</p>
+          {/* Digits display */}
+          <p className="min-w-full">{display ? display : 0}</p>
         </div>
         <Keyboard keyboardOutput={this.handleKeyboardInput} />
       </div>

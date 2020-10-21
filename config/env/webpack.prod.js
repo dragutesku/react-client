@@ -3,6 +3,8 @@ const common = require("../webpack.common");
 const { merge } = require("webpack-merge");
 const OptimizeCssAssetsWebpackPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const CompressionPlugin = require("compression-webpack-plugin");
+const BrotliPlugin = require("brotli-webpack-plugin");
 const { JSBASEPATH, DIST_PATH } = require('../build.config');
 
 
@@ -15,12 +17,19 @@ module.exports = merge(common, {
     path: path.join(DIST_PATH, "dist"),
   },
 
-  optimization: {
-    minimizer: [
-      new OptimizeCssAssetsWebpackPlugin(),   // css minimizer
-      new TerserPlugin(),                     // js minimizer
-    ],
-  },
+  plugins: [
+    new CompressionPlugin({
+    algorithm: 'gzip',
+    test: /\.js$|\.css$|\.html$/,
+    threshold: 10240,
+    minRatio: 0.7
+    }),
+    new BrotliPlugin({
+    test: /\.js$|\.css$|\.html$/,
+    threshold: 10240,
+    minRatio: 0.7
+    })
+  ],
   module: {
     rules: [
       {

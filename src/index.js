@@ -11,6 +11,7 @@ import LoginControl from './client/components/LoginControl/LoginControl';
 import Form from './client/components/Form/Form';
 import TemperatureCalculator from './client/components/TemperatureConverter/TemperatureCalculator';
 import Calculator from './client/components/Calculator/Calculator';
+import Todo from './client/components/todo/todo';
 
 
 // Comment component end
@@ -26,7 +27,8 @@ const App = () => {
 
       <TemperatureCalculator />
 
-      <Calculator />
+      {/* <Calculator /> */}
+      <Todo />
     </div>
   );
 };
